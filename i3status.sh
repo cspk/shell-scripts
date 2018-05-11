@@ -4,7 +4,7 @@ DATE="`LANG=ru_RU.utf8 date +'%d %b %a %H:%M:%S'`"
 LANG="`xkblayout-state print %s`"
 
 VOL_STRING="`amixer get Master | grep % | sed '2d'`"
-VOL_PERCENT="`echo "$VOL_STRING" | grep -Eo '[0-9]{1,3}\%'`"
+VOL_PERCENT="`echo "$VOL_STRING" | grep -Eo '[0-9]{1,3}\%' | tr -d \%`"
 
 VOL_STATE="`echo "$VOL_STRING" | grep -Eo "(\[on\]|\[off\])" | tr -d []`"
 if [ "$VOL_STATE" = "off" ]; then
@@ -13,7 +13,7 @@ else
     VOL_CHAR="🔊"
 fi
 
-VOL="$VOL_CHAR $VOL_PERCENT"
+VOL="$VOL_CHAR $VOL_PERCENT%"
 
 MPD_STATUS="`mpc status`"
 MPD_RC=$?
