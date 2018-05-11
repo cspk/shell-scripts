@@ -21,11 +21,11 @@ fi
 
 VOL="$VOL_CHAR $VOL_PERCENT%"
 
-MPD_STATUS="`mpc status`"
+MPD_STATUS="`mpc status | sed '1d;3d'`"
 MPD_RC=$?
-MPD_STATE="`echo "$MPD_STATUS" | sed '1d;3d' | grep -Eo '\[.*\]' | tr -d "[]"`"
-MPD_TIME="`echo "$MPD_STATUS" | sed '1d;3d' | awk '{ print $3 }'`"
-MPD_TRACKS="`echo "$MPD_STATUS" | sed '1d;3d' | awk '{ print $2 }' | tr -d '#'`"
+MPD_STATE="`echo "$MPD_STATUS" | grep -Eo '\[.*\]' | tr -d "[]"`"
+MPD_TIME="`echo "$MPD_STATUS" | awk '{ print $3 }'`"
+MPD_TRACKS="`echo "$MPD_STATUS" | awk '{ print $2 }' | tr -d '#'`"
 if [ $MPD_RC -eq 1 ]; then
 	MPD="mpd not running |"
 elif [ -z "$MPD_STATE" ]; then
