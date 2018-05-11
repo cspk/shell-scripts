@@ -24,14 +24,16 @@ VOL="$VOL_CHAR $VOL_PERCENT%"
 MPD_STATUS="`mpc status`"
 MPD_RC=$?
 MPD_STATE="`echo "$MPD_STATUS" | sed '1d;3d' | grep -Eo '\[.*\]' | tr -d "[]"`"
+MPD_TIME="`echo "$MPD_STATUS" | sed '1d;3d' | awk '{ print $3 }'`"
+MPD_TRACKS="`echo "$MPD_STATUS" | sed '1d;3d' | awk '{ print $2 }' | tr -d '#'`"
 if [ $MPD_RC -eq 1 ]; then
 	MPD="mpd not running |"
 elif [ -z "$MPD_STATE" ]; then
 	MPD=""
 elif [ "$MPD_STATE" = "paused" ]; then
-	MPD="⏸ `mpc current` |"
+	MPD="⏸ `mpc current` ($MPD_TIME) [$MPD_TRACKS] |"
 else
-	MPD="⯈ `mpc current` |"
+	MPD="⯈ `mpc current` ($MPD_TIME) [$MPD_TRACKS] |"
 fi
 
 echo "$MPD $VOL | $LANG | $DATE"
