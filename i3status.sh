@@ -10,7 +10,13 @@ VOL_STATE="`echo "$VOL_STRING" | grep -Eo "(\[on\]|\[off\])" | tr -d []`"
 if [ "$VOL_STATE" = "off" ]; then
 	VOL_CHAR="🔇"
 else
-	VOL_CHAR="🔊"
+	if [ `expr $VOL_PERCENT \> 40` = "1" ]; then
+		VOL_CHAR="🔊"
+	elif [ `expr $VOL_PERCENT \< 20` = "1" ]; then
+		VOL_CHAR="🔈"
+	else
+		VOL_CHAR="🔉"
+	fi
 fi
 
 VOL="$VOL_CHAR $VOL_PERCENT%"
