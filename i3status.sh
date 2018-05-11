@@ -31,7 +31,7 @@ elif [ -z "$MPD_STATE" ]; then
 elif [ "$MPD_STATE" = "paused" ]; then
 	MPD="⏸ `mpc current` |"
 else
-	MPD="▶ `mpc current` |"
+	MPD="⯈ `mpc current` |"
 fi
 
 echo "$MPD $VOL | $LANG | $DATE"
