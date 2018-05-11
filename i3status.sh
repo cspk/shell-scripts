@@ -23,7 +23,7 @@ VOL="$VOL_CHAR $VOL_PERCENT%"
 
 MPD_STATUS="`mpc status`"
 MPD_RC=$?
-MPD_STATE="`echo $MPD_STATUS | grep -Eo '\[.*\]' | tr -d "[]"`"
+MPD_STATE="`echo "$MPD_STATUS" | sed '1d;3d' | grep -Eo '\[.*\]' | tr -d "[]"`"
 if [ $MPD_RC -eq 1 ]; then
 	MPD="mpd not running |"
 elif [ -z "$MPD_STATE" ]; then
