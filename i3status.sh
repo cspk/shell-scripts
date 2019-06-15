@@ -37,4 +37,4 @@ else
 	MPD="⯈ $MPD_CURRENT ($MPD_TIME) [$MPD_TRACKS] |"
 fi
 
-echo "$MPD $VOL | $LANG | $DATE"
+echo "$MPD $VOL | $LANG | $DATE "
