@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATE="`LANG=ru_RU.utf8 date +'%d %b %a %H:%M:%S'`"
+DATE="`LANG=en_US.UTF-8 date +'%a %b %d %H:%M:%S'`"
 LANG="`xkblayout-state print %s`"
 
 VOL_STRING="`amixer get Master | grep % | sed '2d'`"
