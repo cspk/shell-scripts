@@ -5,6 +5,12 @@ do
 	read line
 
 	VOL=`echo $line | cut -d '|' -f 1`
+	if [ -z $VOL ]; then
+		VOL=""
+	else
+		VOL=$VOL"| "
+	fi
+
 	DATE=`echo $line | cut -d '|' -f 2`
 	LANG="`xkblayout-state print %s`"
 
@@ -24,5 +30,5 @@ do
 		MPD="[playing] `mpc current` ($MPD_TIME) [$MPD_TRACKS] |"
 	fi
 
-	echo "$MPD $VOL| $LANG |$DATE " || exit 1
+	echo "$MPD $VOL$LANG |$DATE " || exit 1
 done
